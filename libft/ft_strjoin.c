@@ -3,36 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeedy <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: arowe <arowe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 17:58:45 by nspeedy           #+#    #+#             */
-/*   Updated: 2021/09/28 17:17:24 by nspeedy          ###   ########.fr       */
+/*   Updated: 2022/06/12 17:08:44 by arowe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
-	size_t	slen1;
-	size_t	slen2;
-	char	*dest;
+	char	*join;
+	size_t	len1;
+	size_t	len2;
+	size_t	i;
 
-	slen1 = 0;
-	slen2 = 0;
-	if (!s1 || !s2)
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	join = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
+	if (!join)
 		return (0);
-	dest = (char *)malloc(sizeof(char) * (sizeof(s1) + sizeof(s2) - 1));
-	while (s1[slen1])
+	i = 0;
+	while (i < len1)
 	{
-		dest[slen1] = s1[slen1];
-		slen1++;
+		join[i] = s1[i];
+		i++;
 	}
-	while (s2[slen2])
+	while (i < len1 + len2)
 	{
-		dest[slen1 + slen2] = s2[slen2];
-		slen2++;
+		join[i] = s2[i - len1];
+		i++;
 	}
-	dest[slen1 + slen2] = '\0';
-	return (dest);
+	join[i] = '\0';
+	return (join);
 }
+

@@ -4,7 +4,7 @@ SRC = src/*.c
 LIBFT = libft
 INC = inc
 
-LIBS = -L$(LIBFT) -lft
+LIBS = -L$(LIBFT) -lft -lreadline
 HEADERS = -I$(INC) -I$(LIBFT)
 FLAGS = -Wall -Werror -Wextra $(LIBS) $(HEADERS)
 

@@ -5,25 +5,101 @@
 #include <sys/wait.h>
 #include <signal.h>
 #include <fcntl.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 #include "smsh.h"
+#include "minishell.h"
+#include "libft.h"
 
-#define DFL_PROMPT "> "
+void	free_strarray(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
+}
+
+char	*check_access(char **paths, char *cmd[])
+{
+	int		i;
+	char	*temp;
+	char	*path;
+
+	i = 0;
+	
+	while (paths[i])
+	{
+		// printf("%s\n", paths[i]);
+		temp = ft_strjoin(paths[i], "/");
+		path = ft_strjoin(temp, cmd[0]);
+		free(temp);
+		if (access(path, X_OK) == 0)
+		{
+			free_strarray(paths);
+			return (path);
+		}
+		free(path);
+		i++;
+	}
+	free_strarray(paths);
+	return (NULL);
+}
+
+char	*find_path(char *cmd[])
+{
+	int		i;
+	char	**paths;
+
+	i = 0;
+	paths = NULL;
+	
+	while (environ[i])
+	{
+		if (ft_strncmp("PATH=", environ[i], 5) == 0)
+		{
+			paths = ft_split(environ[i] + 5, ':');
+			break ;
+		}
+		i++;
+	}
+	while (paths[i])
+		printf("%s\n", paths[i++]);
+	return (check_access(paths, cmd));
+}
+
+void setup()
+/*
+ * purpose: initialize shell
+ * returns: nothing. calls fatal() if trouble
+ */
+{
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+}
 
 int main()
 {
-	char *cmdline, *prompt, **arglist, **command_args, **redirect;
-	int new_p[2], old_p[2], cmd_amt, pid;
-	// int saved_stdout = dup(1);
-	// int saved_stdin = dup(0);
-	void setup();
+	char *cmdline, *prompt, **arglist, **command_args, **redirect, *command;
+	int new_p[2], old_p[2], cmd_amt, pid, exit_code;
 
-	prompt = DFL_PROMPT;
+	prompt = "> ";
 	setup();
 
-	while ((cmdline = next_cmd(prompt, stdin)) != NULL)
+	while ((cmdline = readline(prompt)) != NULL)
 	{
-		if ((arglist = splitline(cmdline, '|')) != NULL)
+		if (ft_strncmp("exit", cmdline, 4) == 0)
 		{
+			if (ft_strncmp("exit", cmdline, ft_strlen(cmdline)) == 0)
+				exit(0);
+			arglist = ft_split(cmdline, ' ');
+			exit_code = ft_atoi(arglist[1]);
+			exit(exit_code);
+		}
+		if ((arglist = ft_split(cmdline, '|')) != NULL)
+		{
+			add_history(cmdline);
 			cmd_amt = 0;
 			for (int i = 0; arglist[i]; i++)
 				cmd_amt++;
@@ -53,11 +129,10 @@ int main()
 					}
 					else
 					{
-						redirect = splitline(arglist[i], '<');
+						redirect = ft_split(arglist[i], '<');
 						int j = 0;
 						while (redirect[j])
 							j++;
-						printf("%d\n", j);
 						if (j == 2) {
 							int fd = open(redirect[1], O_RDONLY);
 							dup2(fd, 0);
@@ -74,10 +149,16 @@ int main()
 
 					}
 					// strsplit function splits each command and it's arguments into an array of strings
-					command_args = splitline(arglist[i], ' ');
+					command_args = ft_split(arglist[i], ' ');
 					signal(SIGINT, SIG_DFL);
 					signal(SIGQUIT, SIG_DFL);
-					execvp(command_args[0], command_args);
+					if (access(command_args[0], X_OK) != 0)
+						command = find_path(command_args);
+					else
+						command = command_args[0];
+					printf("%s\n", command);
+					execve(command, command_args, environ);
+					perror("execve");
 				}
 				// parent process
 				else {
@@ -112,8 +193,8 @@ int strarrlen(char **arr)
 
 void handle_redirect(char *cmd)
 {
-	char **redirect_in = splitline(cmd, '<');
-	char **redirect_out = splitline(cmd, '>');
+	char **redirect_in = ft_split(cmd, '<');
+	char **redirect_out = ft_split(cmd, '>');
 	int rinlen = strarrlen(redirect_in);
 	int routlen = strarrlen(redirect_out);
 
@@ -121,15 +202,6 @@ void handle_redirect(char *cmd)
 		return;
 }
 
-void setup()
-/*
- * purpose: initialize shell
- * returns: nothing. calls fatal() if trouble
- */
-{
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-}
 
 void fatal(char *s1, char *s2, int n)
 {
