@@ -6,7 +6,7 @@
 /*   By: nspeedy <nspeedy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 15:45:14 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/06/20 13:45:12 by nspeedy          ###   ########.fr       */
+/*   Updated: 2022/06/20 15:02:42 by nspeedy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ char	*check_access(char **paths, char *cmd[]);
 int		strarrlen(char **arr);
 void	free_strarray(char **arr);
 void	exsit(char *cmdline, char **arglist);
-void	init_struct(t_data *data);
-void	redir_pipe(t_data *d, int i);
-void	op_cl(t_data *d, int old_p[], int new_p[], int i);
-int		bad_pipe(t_data *d, int new_p[], int i);
-void	child_process(t_data *d, int old_p[], int new_p[], int i);
-void	parent_process(t_data *d, int old_p[], int new_p[], int i);
-int		manage(t_data *d, int old_p[], int new_p[]);
+void	redir_pipe(int i);
+void	op_cl(int old_p[], int new_p[], int i);
+int		bad_pipe(int new_p[], int i);
+void	child_process(int old_p[], int new_p[], int i);
+void	parent_process(int old_p[], int new_p[], int i);
+int		manage(int old_p[], int new_p[]);
+void	siggles(void);
 
 #endif

@@ -3,9 +3,10 @@ SRC = src/*.c
 
 LIBFT = libft
 INC = inc
+LINK = /usr/local/opt/readline/lib -lreadline
 
-LIBS = -L$(LIBFT) -lft -lreadline
-HEADERS = -I$(INC) -I$(LIBFT)
+LIBS = -L$(LIBFT) -lft -L$(LINK)
+HEADERS = -I$(INC) -I$(LIBFT) -I /usr/local/opt/readline/include/
 FLAGS = -Wall -Werror -Wextra $(LIBS) $(HEADERS)
 
 all:

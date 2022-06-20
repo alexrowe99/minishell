@@ -6,11 +6,13 @@
 /*   By: nspeedy <nspeedy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 12:50:59 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/06/20 12:59:53 by nspeedy          ###   ########.fr       */
+/*   Updated: 2022/06/20 14:44:31 by nspeedy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_data	g_d;
 
 char	*check_access(char **paths, char *cmd[])
 {

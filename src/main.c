@@ -6,32 +6,35 @@
 /*   By: nspeedy <nspeedy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 12:51:14 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/06/20 13:44:53 by nspeedy          ###   ########.fr       */
+/*   Updated: 2022/06/20 15:01:06 by nspeedy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+t_data	g_d;
+
 int	main(void)
 {
-	t_data	d;	
 	int		new_p[2];
 	int		old_p[2];
 
-	d.cmdline = readline("> ");
-	while (d.cmdline != NULL)
+	siggles();
+	g_d.cmdline = readline("> ");
+	while (g_d.cmdline != NULL)
 	{
-		d.arglist = ft_split(d.cmdline, '|');
-		exsit(d.cmdline, d.arglist);
-		if (d.arglist != NULL)
+		g_d.arglist = ft_split(g_d.cmdline, '|');
+
+		exsit(g_d.cmdline, g_d.arglist);
+		if (g_d.arglist != NULL)
 		{
-			add_history(d.cmdline);
-			if (manage(&d, old_p, new_p) == 1)
+			add_history(g_d.cmdline);
+			if (manage(old_p, new_p) == 1)
 				return (1);
-			free_strarray(d.arglist);
+			free_strarray(g_d.arglist);
 		}
-		free(d.cmdline);
-		d.cmdline = readline("> ");
+		free(g_d.cmdline);
+		g_d.cmdline = readline("> ");
 	}
 	return (0);
 }

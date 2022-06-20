@@ -6,15 +6,17 @@
 /*   By: nspeedy <nspeedy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 12:56:33 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/06/20 13:42:35 by nspeedy          ###   ########.fr       */
+/*   Updated: 2022/06/20 15:58:51 by nspeedy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	bad_pipe(t_data *d, int new_p[], int i)
+extern t_data	g_d;
+
+int	bad_pipe(int new_p[], int i)
 {
-	if (i != d->cmd_amt - 1)
+	if (i != g_d.cmd_amt - 1)
 	{
 		if (pipe(new_p) == -1)
 		{
@@ -22,8 +24,8 @@ int	bad_pipe(t_data *d, int new_p[], int i)
 			return (1);
 		}
 	}
-	d->pid = fork();
-	if (d->pid < 0)
+	g_d.pid = fork();
+	if (g_d.pid < 0)
 	{
 		printf("bad fork\n");
 		return (1);
@@ -31,31 +33,31 @@ int	bad_pipe(t_data *d, int new_p[], int i)
 	return (0);
 }
 
-void	child_process(t_data *d, int old_p[], int new_p[], int i)
+void	child_process(int old_p[], int new_p[], int i)
 {
-	if (d->pid == 0)
+	if (g_d.pid == 0)
 	{
-		op_cl(d, old_p, new_p, i);
-		d->command_args = ft_split(d->arglist[i], ' ');
-		if (access(d->command_args[0], X_OK) != 0)
-			d->command = find_path(d->command_args);
+		op_cl(old_p, new_p, i);
+		g_d.command_args = ft_split(g_d.arglist[i], ' ');
+		if (access(g_d.command_args[0], X_OK) != 0)
+			g_d.command = find_path(g_d.command_args);
 		else
-			d->command = d->command_args[0];
-		execve(d->command, d->command_args, environ);
+			g_d.command = g_d.command_args[0];
+		execve(g_d.command, g_d.command_args, environ);
 		perror("execve");
 	}
 }
 
-void	parent_process(t_data *d, int old_p[], int new_p[], int i)
+void	parent_process(int old_p[], int new_p[], int i)
 {
-	if (d->pid > 0)
+	if (g_d.pid > 0)
 	{	
 		if (i != 0)
 		{
 			close(old_p[0]);
 			close(old_p[1]);
 		}
-		if (i != d->cmd_amt - 1)
+		if (i != g_d.cmd_amt - 1)
 		{
 			old_p[0] = new_p[0];
 			old_p[1] = new_p[1];
@@ -64,24 +66,40 @@ void	parent_process(t_data *d, int old_p[], int new_p[], int i)
 	}
 }
 
-int	manage(t_data *d, int old_p[], int new_p[])
+void	op_cl(int old_p[], int new_p[], int i)
+{
+	if (i != 0)
+	{
+		close(old_p[1]);
+		dup2(old_p[0], 0);
+		close(old_p[0]);
+	}
+	if (i != g_d.cmd_amt - 1)
+	{
+		close(new_p[0]);
+		dup2(new_p[1], 1);
+		close(new_p[1]);
+	}
+}
+
+int	manage(int old_p[], int new_p[])
 {
 	int	i;
 
 	i = 0;
-	d->cmd_amt = 0;
-	while (d->arglist[i])
+	g_d.cmd_amt = 0;
+	while (g_d.arglist[i])
 	{
-		d->cmd_amt++;
+		g_d.cmd_amt++;
 		i++;
 	}
 	i = 0;
-	while (i < d->cmd_amt)
+	while (i < g_d.cmd_amt)
 	{
-		if (bad_pipe(d, new_p, i) == 1)
+		if (bad_pipe(new_p, i) == 1)
 			return (1);
-		child_process(d, old_p, new_p, i);
-		parent_process(d, old_p, new_p, i);
+		child_process(old_p, new_p, i);
+		parent_process(old_p, new_p, i);
 		i++;
 	}
 	return (0);
