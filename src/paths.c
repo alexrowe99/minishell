@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   paths.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nspeedy <nspeedy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/20 12:50:59 by nspeedy           #+#    #+#             */
+/*   Updated: 2022/06/20 12:59:53 by nspeedy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 char	*check_access(char **paths, char *cmd[])
@@ -7,7 +19,6 @@ char	*check_access(char **paths, char *cmd[])
 	char	*path;
 
 	i = 0;
-	
 	while (paths[i])
 	{
 		temp = ft_strjoin(paths[i], "/");
@@ -32,7 +43,6 @@ char	*find_path(char *cmd[])
 
 	i = 0;
 	paths = NULL;
-	
 	while (environ[i])
 	{
 		if (ft_strncmp("PATH=", environ[i], 5) == 0)

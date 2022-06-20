@@ -1,10 +1,16 @@
-#include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   errors.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nspeedy <nspeedy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/20 12:50:56 by nspeedy           #+#    #+#             */
+/*   Updated: 2022/06/20 13:44:38 by nspeedy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	fatal(char *s1, char *s2, int n)
-{
-	fprintf(stderr, "Error: %s,%s\n", s1, s2);
-	exit(n);
-}
+#include "minishell.h"
 
 void	free_strarray(char **arr)
 {
@@ -14,16 +20,6 @@ void	free_strarray(char **arr)
 	while (arr[i])
 		free(arr[i++]);
 	free(arr);
-}
-
-void	freelist(char **list)
-{
-	char	**cp;
-	
-	cp = list;
-	while(*cp)
-		free(*cp++);
-	free(list);
 }
 
 void	exsit(char *cmdline, char **arglist)
