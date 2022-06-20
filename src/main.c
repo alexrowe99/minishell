@@ -37,50 +37,8 @@ int main()
 			d.cmd_amt = 0;
 			for (int i = 0; d.arglist[i]; i++)
 				d.cmd_amt++;
-			for (int i=0;i<d.cmd_amt;i++) 
-			{
-				if (i != d.cmd_amt - 1) 
-				{
-					if (pipe(new_p) == -1) 
-					{
-						printf("bad pipe\n");
-						return (1);
-					}
-				}
-				d.pid = fork();
-				if (d.pid < 0)
-				{
-					printf("bad fork\n");
-					return (1);
-				}
-				if (d.pid == 0) 
-				{
-					op_cl(&d, old_p, new_p, i);
-					d.command_args = ft_split(d.arglist[i], ' ');
-					signal(SIGINT, SIG_DFL);
-					signal(SIGQUIT, SIG_DFL);
-					if (access(d.command_args[0], X_OK) != 0)
-						d.command = find_path(d.command_args);
-					else
-						d.command = d.command_args[0];
-					execve(d.command, d.command_args, environ);
-					perror("execve");
-				}
-				else 
-				{
-					if (i != 0) 
-					{
-						close(old_p[0]);
-						close(old_p[1]);
-					}
-					if (i != d.cmd_amt - 1) 
-					{
-						old_p[0] = new_p[0];
-						old_p[1] = new_p[1];
-					}
-					wait(NULL);
-				}
-			}
+			if (manage(&d, old_p, new_p) == 1)
+				return (1);
 			freelist(d.arglist);
 		}
 		free(d.cmdline);
