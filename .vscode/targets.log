@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Jun 12 13:33:46 2022
+# Make data base, printed on Mon Jun 20 16:09:56 2022
 
 # Variables
 
@@ -15,7 +15,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # automatic
 ?F = $(notdir $?)
 # environment
-WSLENV = ELECTRON_RUN_AS_NODE/w:
+WSLENV = VSCODE_WSL_EXT_LOCATION/up:VSCODE_SERVER_TAR/up
 # default
 .SHELLFLAGS := -c
 # makefile (from 'Makefile', line 1)
@@ -35,7 +35,7 @@ SHELL = /bin/sh
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
 # environment
-_ = /mnt/c/Users/Alex.Rowe/AppData/Local/Programs/Microsoft VS Code/bin/code
+_ = /home/alex/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/node
 # makefile (from 'Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # 'override' directive
@@ -51,11 +51,13 @@ VSCODE_CWD = /mnt/c/Users/Alex.Rowe/AppData/Local/Programs/Microsoft VS Code
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
-PATH = /home/alex/.vscode-server/bin/4af164ea3a06f701fe3e89a2bcbb421d2026b68f/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/WindowsApps/CanonicalGroupLimited.UbuntuonWindows_2004.2022.1.0_x64__79rhkp1fndgsc:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/dotnet/:/mnt/c/Users/Alex.Rowe/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Alex.Rowe/AppData/Local/Programs/Microsoft VS Code/bin:/snap/bin
+PATH = /home/alex/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/dotnet/:/mnt/c/Users/Alex.Rowe/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Alex.Rowe/AppData/Local/Programs/Microsoft VS Code/bin:/snap/bin
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-4b32f70d-75fb-4b95-86d7-684154ccb06d.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-85039b7f-6c9d-4283-bcd1-390c61b67cc8.sock
+# environment
+VSCODE_SERVER_TAR = /mnt/c/Users/ALEX~1.ROW/AppData/Local/Temp/vscode-remote-wsl/30d9c6cd9483b2cc586687151bcbcd635f373630/vscode-server-stable-linux-x64.tar.gz
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -69,7 +71,7 @@ PWD = /home/alex/work/42/minishell/github-repo
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/8_interop
+WSL_INTEROP = /run/WSL/12_interop
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -93,7 +95,7 @@ MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
 # environment
-SHLVL = 1
+SHLVL = 0
 # makefile (from 'Makefile', line 4)
 LIBFT = libft
 # default
@@ -103,7 +105,7 @@ USER = alex
 # makefile
 .DEFAULT_GOAL := all
 # environment
-NAME = Code
+NAME = SRA-LT-2039
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
@@ -137,7 +139,7 @@ LC_ALL = C
 # environment
 HOSTTYPE = x86_64
 # makefile (from 'Makefile', line 7)
-LIBS = -L$(LIBFT) -lft
+LIBS = -L$(LIBFT) -lft -lreadline
 # automatic
 ^F = $(notdir $^)
 # default
@@ -157,7 +159,7 @@ VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 # environment
 WSL_DISTRO_NAME = Ubuntu
 # variable set hash-table stats:
-# Load=73/1024=7%, Rehash=0, Collisions=4/109=4%
+# Load=74/1024=7%, Rehash=0, Collisions=4/110=4%
 
 # Pattern-specific Variable Values
 
@@ -165,9 +167,9 @@ WSL_DISTRO_NAME = Ubuntu
 
 # Directories
 
-# . (device 2064, inode 46841): 7 files, no impossibilities.
+# . (device 2064, inode 46841): 9 files, no impossibilities.
 
-# 7 files, no impossibilities in 1 directories.
+# 9 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -216,7 +218,7 @@ all:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-12 13:33:03.929189819
+#  Last modified 2022-06-15 09:25:26.416081682
 #  File has been updated.
 #  Successfully updated.
 
@@ -254,12 +256,12 @@ clean:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 15 / storage = 108 B / avg = 7 B
-# current buf: size = 8162 B / used = 108 B / count = 15 / avg = 7 B
+# strcache buffers: 1 (0) / strings = 17 / storage = 122 B / avg = 7 B
+# current buf: size = 8162 B / used = 122 B / count = 17 / avg = 7 B
 
-# strcache performance: lookups = 28 / hit rate = 46%
+# strcache performance: lookups = 30 / hit rate = 43%
 # hash-table stats:
-# Load=15/8192=0%, Rehash=0, Collisions=1/28=4%
-# Finished Make data base on Sun Jun 12 13:33:46 2022
+# Load=17/8192=0%, Rehash=0, Collisions=1/30=3%
+# Finished Make data base on Mon Jun 20 16:09:56 2022
 
  

@@ -23,7 +23,6 @@
 # include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "minishell.h"
 
 typedef struct s_data
 {
@@ -49,6 +48,7 @@ int		bad_pipe(int new_p[], int i);
 void	child_process(int old_p[], int new_p[], int i);
 void	parent_process(int old_p[], int new_p[], int i);
 int		manage(int old_p[], int new_p[]);
+void    redirect(void);
 void	siggles(void);
 
 #endif
