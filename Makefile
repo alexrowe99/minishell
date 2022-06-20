@@ -9,6 +9,7 @@ HEADERS = -I$(INC) -I$(LIBFT)
 FLAGS = -Wall -Werror -Wextra $(LIBS) $(HEADERS)
 
 all:
+	@clear
 	@make -s -C $(LIBFT)
 	@echo Compiling libft
 	@gcc $(SRC) $(FLAGS) -o minishell 
