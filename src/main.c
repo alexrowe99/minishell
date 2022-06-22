@@ -20,11 +20,10 @@ int	main(void)
 	int		old_p[2];
 
 	siggles();
-	g_d.cmdline = readline("> ");
+	g_d.cmdline = readline(">>> ");
 	while (g_d.cmdline != NULL)
 	{
 		g_d.arglist = ft_split(g_d.cmdline, '|');
-
 		exsit(g_d.cmdline, g_d.arglist);
 		if (g_d.arglist != NULL)
 		{
@@ -34,7 +33,7 @@ int	main(void)
 			free_strarray(g_d.arglist);
 		}
 		free(g_d.cmdline);
-		g_d.cmdline = readline("> ");
+		g_d.cmdline = readline(">>> ");
 	}
 	return (0);
 }

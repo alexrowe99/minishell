@@ -39,6 +39,7 @@ void	child_process(int old_p[], int new_p[], int i)
 	{
 		op_cl(old_p, new_p, i);
 		g_d.command_args = ft_split(g_d.arglist[i], ' ');
+		printf("%s\n", g_d.arglist[i]);
 		redirect();
 		if (access(g_d.command_args[0], X_OK) != 0)
 			g_d.command = find_path(g_d.command_args);

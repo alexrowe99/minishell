@@ -30,6 +30,7 @@ typedef struct s_data
 	char	**arglist;
 	char	**command_args;
 	char	**redirect;
+	char	**quotes;
 	char	*command;
 	char	*prompt;
 	int		cmd_amt;
@@ -50,5 +51,6 @@ void	parent_process(int old_p[], int new_p[], int i);
 int		manage(int old_p[], int new_p[]);
 void    redirect(void);
 void	siggles(void);
-
+void    singles(void);
+void    first_wrdq(void);
 #endif
