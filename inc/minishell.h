@@ -6,7 +6,7 @@
 /*   By: nspeedy <nspeedy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 15:45:14 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/06/20 15:02:42 by nspeedy          ###   ########.fr       */
+/*   Updated: 2022/07/04 12:14:21 by nspeedy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ typedef struct s_data
 	int		cmd_amt;
 	int		pid;
 }	t_data;
+
+typedef struct s_split
+{
+	int	i;
+	int	n;
+}
 
 extern char	**environ;
 char	*find_path(char *cmd[]);
