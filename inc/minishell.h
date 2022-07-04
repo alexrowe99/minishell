@@ -6,7 +6,7 @@
 /*   By: nspeedy <nspeedy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 15:45:14 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/07/04 12:14:21 by nspeedy          ###   ########.fr       */
+/*   Updated: 2022/07/04 13:00:30 by nspeedy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ typedef struct s_data
 typedef struct s_split
 {
 	int	i;
+	int	j;
+	int	k;
 	int	n;
-}
+}	t_split;
 
 extern char	**environ;
 char	*find_path(char *cmd[]);
