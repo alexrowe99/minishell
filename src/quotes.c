@@ -24,7 +24,12 @@ int     arg_count(char **arglist)
     return (hma);
 }
 
-char    *stuff(char **arglist)
+// char **no_quotes(char **arglist)
+// {
+//     if 
+// }
+
+char    **stuff(char **arglist)
 {
     int     i;
     int     ac;
@@ -49,8 +54,8 @@ char    *stuff(char **arglist)
     {
         while (arglist[i] != NULL)   
         {   
-            printf("n here is ----------------- 1st call %i\n", n);
-            printf("------------------------------------arglist[%i] %s\n", i, arglist[i]);
+            // printf("n here is ----------------- 1st call %i\n", n);
+            // printf("------------------------------------arglist[%i] %s\n", i, arglist[i]);
             if (ft_isalpha(arglist[i][j]))   
             {   
                 while (arglist[i][j] != ' ')
@@ -63,11 +68,11 @@ char    *stuff(char **arglist)
                     n++;
                 }
             }
-            if (arglist[i][k] == '\'' || arglist[i][k] == '\"')
+            if ((arglist[i][k] == '\'' || arglist[i][k] == '\"') && k != 0)
             {
-                printf("k here is ******** %i\n", k);
+                // printf("k here is ******** %i\n", k);
                 k++;
-                printf("CHAR HERE ----- arglist[%i][%i] %c\n", i, k, arglist[i][k]);
+                // printf("CHAR HERE ----- arglist[%i][%i] %c\n", i, k, arglist[i][k]);
                 while (arglist[i][k] != '\0')
                 {
                     k++;
@@ -78,8 +83,30 @@ char    *stuff(char **arglist)
                         printf("n_args[%i] here is %s\n", n, n_args[n]);
                         n++;
                         k++;
-                        printf("END OF QUOTES SPLIT\n");
+                        // printf("END OF QUOTES SPLIT\n");
                     }
+                }
+                l = 0;
+                k = 0;
+            }
+            if ((arglist[i][k] == '\'' || arglist[i][k] == '\"') && k == 0)
+            {
+                k++;
+                while (arglist[i][k] != '\0')
+                {
+                    k++;
+                    l++;
+                    if ((arglist[i][k] == '\"' || arglist[i][k] == '\'') )
+                    {
+                        n_args[n] = ft_substr(arglist[i], j + 1, l);
+                        printf("n_args[%i] heresfjfsjjs is %s\n", n, n_args[n]);
+                        n++;
+                        k++;
+                        // j = 0;
+                        n_args[n] = NULL;
+                    }
+                    // printf("here KKKKKKK = %i\n", k);
+                    // printf("CHAR HERE ******* arglist[%i][%i] == %c\n", i, k, arglist[i][k]);
                 }
                 l = 0;
             }
@@ -87,11 +114,9 @@ char    *stuff(char **arglist)
             k = 0;
             j = 0;
         }
-        printf("n here is ----------------- last loop call %i\n", n);
-        
     }  
-    printf("END\n");
-    return (*n_args);
+    // printf("END\n");
+    return (n_args);
 }
 
 int main(void)
@@ -101,13 +126,12 @@ int main(void)
 
     fds = ft_calloc(sizeof(char *), 5);
     other = ft_calloc(sizeof(char *),  5);
-    fds[0] = "echo \"This string\"";
+    fds[0] = "echo do this string first \"This string\"";
     fds[1] = "next \"atring this\"";
     fds[2] = "\"Not in quotes\"";
-
-    while (fds[j])
+    other = stuff(fds);
+    while (other[j])
     {
-        other[j] = stuff(fds);
         printf("string %i is %s\n", j, other[j]);
         j++;
     }
