@@ -54,8 +54,6 @@ char    **stuff(char **arglist)
     {
         while (arglist[i] != NULL)   
         {   
-            // printf("n here is ----------------- 1st call %i\n", n);
-            // printf("------------------------------------arglist[%i] %s\n", i, arglist[i]);
             if (ft_isalpha(arglist[i][j]))   
             {   
                 while (arglist[i][j] != ' ')
@@ -70,9 +68,7 @@ char    **stuff(char **arglist)
             }
             if ((arglist[i][k] == '\'' || arglist[i][k] == '\"') && k != 0)
             {
-                // printf("k here is ******** %i\n", k);
                 k++;
-                // printf("CHAR HERE ----- arglist[%i][%i] %c\n", i, k, arglist[i][k]);
                 while (arglist[i][k] != '\0')
                 {
                     k++;
@@ -83,7 +79,6 @@ char    **stuff(char **arglist)
                         printf("n_args[%i] here is %s\n", n, n_args[n]);
                         n++;
                         k++;
-                        // printf("END OF QUOTES SPLIT\n");
                     }
                 }
                 l = 0;
@@ -102,11 +97,7 @@ char    **stuff(char **arglist)
                         printf("n_args[%i] heresfjfsjjs is %s\n", n, n_args[n]);
                         n++;
                         k++;
-                        // j = 0;
-                        n_args[n] = NULL;
                     }
-                    // printf("here KKKKKKK = %i\n", k);
-                    // printf("CHAR HERE ******* arglist[%i][%i] == %c\n", i, k, arglist[i][k]);
                 }
                 l = 0;
             }
@@ -115,7 +106,7 @@ char    **stuff(char **arglist)
             j = 0;
         }
     }  
-    // printf("END\n");
+    n_args[n] = NULL;
     return (n_args);
 }
 
@@ -126,9 +117,9 @@ int main(void)
 
     fds = ft_calloc(sizeof(char *), 5);
     other = ft_calloc(sizeof(char *),  5);
-    fds[0] = "echo do this string first \"This string\"";
+    fds[0] = "first \"This string\"";
     fds[1] = "next \"atring this\"";
-    fds[2] = "\"Not in quotes\"";
+    fds[2] = "\"Not in quotes\" hi";
     other = stuff(fds);
     while (other[j])
     {
