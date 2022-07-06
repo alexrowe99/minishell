@@ -39,10 +39,14 @@ typedef struct s_data
 
 typedef struct s_split
 {
-	int	i;
-	int	j;
-	int	k;
-	int	n;
+	int		i;
+	int		j;
+	int		k;
+	int		l;
+	int		n;
+	int		m;
+	int		ac;
+	char	**n_args;	
 }	t_split;
 
 extern char	**environ;
