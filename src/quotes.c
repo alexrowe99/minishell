@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeedy <nspeedy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:03:37 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/07/04 12:58:50 by nspeedy          ###   ########.fr       */
+/*   Updated: 2022/07/06 13:47:43 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,90 +24,78 @@ int     arg_count(char **arglist)
     return (hma);
 }
 
-t_split *s_quotes(char **arglist, t_split *s)
+t_split *s_quotes(char *arglist, t_split *s)
 {
-    if ((arglist[s->i][s->k] == '\'' || arglist[s->i][s->k] == '\"') && s->k != 0)
+    if ((arglist[s->k] == '\'' || arglist[s->k] == '\"') && s->k != 0)
     {
-        // printf("kkkk ===== %i\n", s->k);
-        // printf("Here k ==== %c\n", arglist[s->i][s->k + 1]);
         s->k++;
-        while (arglist[s->i][s->k] != '\0')
+        while (arglist[s->k] != '\0')
         {
             s->k++;
             s->l++;
-            if ((arglist[s->i][s->k] == '\"' || arglist[s->i][s->k] == '\'') )
+            if ((arglist[s->k] == '\"' || arglist[s->k] == '\'') )
             {
-                s->n_args[s->n] = ft_substr(arglist[s->i], s->j + 1, s->l);
-                printf("n_args[%i] here is %s\n", s->n, s->n_args[s->n]);
+                s->n_args[s->n] = ft_substr(arglist, s->j + 1, s->l);
+                printf("s_quotes token %d is: %s\n", s->n, s->n_args[s->n]);
                 s->n++;
                 s->k++;
             }
         }
+        s->j = s->k;
         s->l = 0;
         s->k = 0;
     }
     return (s);
 }
 
-t_split *no_quotes(char **arglist, t_split *s)
+t_split *no_quotes(char *arglist, t_split *s)
 {
-    while (arglist[s->i][s->j] != '\0')   
+    while (arglist[s->j] != '\0')   
     {   
-        // printf("Here k ==== %c\n", arglist[s->i][s->k]);
-        // printf("kkkk ===pre== %i\n", s->k);
-        if (ft_isalpha(arglist[s->i][s->j]))    
-        {    
-            while (arglist[s->i][s->j] != ' ' && (arglist[s->i][s->j + 1] != '\"' || arglist[s->i][s->j + 1] != '\''))
+        // printf("i: %d, j: %d\n", s->i, s->j);
+        // if (ft_isalpha(arglist[s->j]))
+        // {    
+            while (arglist[s->j] != ' ' && (arglist[s->j + 1] != '\"' || arglist[s->j + 1] != '\'') && arglist[s->j] != '\0')
             {
                 s->j++;
                 s->l++;
-                printf("j in loop =========== %i\n", s->j);
-                // printf("l in loop ==== %i\n", s->l);
             }
-            // printf("kkkk ===pre== %i\n", s->k);
             s->k = s->j + 1;
-            // printf("kkkk ==post=== %i\n", s->k);
-            // printf("Here k ==== %c\n", arglist[s->i][s->k + 1]);
-            if (arglist[s->i][s->j] == ' ')
+            if (arglist[s->j] == ' ' || arglist[s->j] == '\0')
             {
-                s->n_args[s->n] = ft_substr(arglist[s->i], s->m, s->l);
-                printf("n_args[%i] up here is %s\n", s->n, s->n_args[s->n]);
-                printf("Here j ==pre== %c\n", arglist[s->i][13]);
-                printf("kkkk ===pre== %i\n", s->j);
+                s->n_args[s->n] = ft_substr(arglist, s->m, s->l);
+                // printf("arglist[j]: %c\n", arglist[s->m]);
+                printf("no_quotes token %d is: %s\n", s->n, s->n_args[s->n]);
                 s->n++;
-                s->j++;
-                printf("kkkk ===post== %i\n", s->j);
-                printf("Here j ==post== %c\n", arglist[s->i][s->j]);
+                if (arglist[s->j] != '\0')
+                    s->j++;
                 s->m = s->k;
                 s->l = 0;
-                no_quotes(arglist, s);
-                        
+                // no_quotes(arglist, s); 
             }
-            // printf("kkkk ===== %i\n", s->k);
             // if (arglist[s->i][s->j] != '\0')
             //         s->j = 0;
             s_quotes(arglist, s);
-        }
-
+        // }
+        // printf("arglist[j]: %c\n", arglist[s->j]);
     }
     return (s);
 }
 
 
 
-t_split *all_quotes(char **arglist, t_split *s)
+t_split *all_quotes(char *arglist, t_split *s)
 {
-    if ((arglist[s->i][s->k] == '\'' || arglist[s->i][s->k] == '\"') && s->k == 0)
+    if ((arglist[s->k] == '\'' || arglist[s->k] == '\"') && s->k == 0)
     {
         s->k++;
-        while (arglist[s->i][s->k] != '\0')
+        while (arglist[s->k] != '\0')
         {
             s->k++;
             s->l++;
-            if ((arglist[s->i][s->k] == '\"' || arglist[s->i][s->k] == '\'') )
+            if ((arglist[s->k] == '\"' || arglist[s->k] == '\'') )
             {
-                s->n_args[s->n] = ft_substr(arglist[s->i], s->j + 1, s->l);
-                printf("n_args[%i] heresfjfsjjs is %s\n", s->n, s->n_args[s->n]);
+                s->n_args[s->n] = ft_substr(arglist, s->j + 1, s->l);
                 s->n++;
                 s->k++;
             }
@@ -120,14 +108,6 @@ t_split *all_quotes(char **arglist, t_split *s)
 char    **stuff(char **arglist)
 {
     t_split s;
-    // int     i;
-    // int     ac;
-    // int     k;
-    // int     n;
-    // int     j;
-    // int     l;
-    // int     m;
-    // char    **n_args;
 
 
     s.i = 0;
@@ -145,48 +125,12 @@ char    **stuff(char **arglist)
     {
         while (arglist[s.i] != NULL)   
         {   
-            no_quotes(arglist, &s);
-            // s_quotes(arglist, &s);
-            all_quotes(arglist, &s);
-            // if ((arglist[s.i][s.k] == '\'' || arglist[s.i][s.k] == '\"') && s.k != 0)
-            // {
-            //     s.k++;
-            //     while (arglist[s.i][s.k] != '\0')
-            //     {
-            //         s.k++;
-            //         s.l++;
-            //         if ((arglist[s.i][s.k] == '\"' || arglist[s.i][s.k] == '\'') )
-            //         {
-            //             s.n_args[s.n] = ft_substr(arglist[s.i], s.j + 1, s.l);
-            //             printf("n_args[%i] here is %s\n", s.n, s.n_args[s.n]);
-            //             s.n++;
-            //             s.k++;
-            //         }
-            //     }
-
-            //     s.l = 0;
-            //     s.k = 0;
-            // }
-            // if ((arglist[s.i][s.k] == '\'' || arglist[s.i][s.k] == '\"') && s.k == 0)
-            // {
-            //     s.k++;
-            //     while (arglist[s.i][s.k] != '\0')
-            //     {
-            //         s.k++;
-            //         s.l++;
-            //         if ((arglist[s.i][s.k] == '\"' || arglist[s.i][s.k] == '\'') )
-            //         {
-            //             s.n_args[s.n] = ft_substr(arglist[s.i], s.j + 1, s.l);
-            //             printf("n_args[%i] heresfjfsjjs is %s\n", s.n, s.n_args[s.n]);
-            //             s.n++;
-            //             s.k++;
-            //         }
-            //     }
-            //     s.l = 0;
-            // }
+            no_quotes(arglist[s.i], &s);
+            // all_quotes(arglist[s.i], &s);
             s.i++;
             s.k = 0;
             s.j = 0;
+            s.m = 0;
         }
     }  
     
