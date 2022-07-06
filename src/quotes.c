@@ -36,7 +36,6 @@ t_split *s_quotes(char *arglist, t_split *s)
             if ((arglist[s->k] == '\"' || arglist[s->k] == '\'') )
             {
                 s->n_args[s->n] = ft_substr(arglist, s->j + 1, s->l);
-                printf("s_quotes token %d is: %s\n", s->n, s->n_args[s->n]);
                 s->n++;
                 s->k++;
                 break ;
@@ -58,56 +57,22 @@ t_split *no_quotes(char *arglist, t_split *s)
 {
     while (arglist[s->j] != '\0')   
     {   
-        // printf("i: %d, j: %d\n", s->i, s->j);
-        // if (ft_isalpha(arglist[s->j]))
-        // {
-            s_quotes(arglist, s);
-            while (arglist[s->j] != ' ' && (arglist[s->j + 1] != '\"' || arglist[s->j + 1] != '\'') && arglist[s->j] != '\0')
-            {
-                s->j++;
-                s->l++;
-            }
-            s->k = s->j + 1;
-            if ((arglist[s->j] == ' ' || arglist[s->j] == '\0') && s->l != 0)
-            {
-                s->n_args[s->n] = ft_substr(arglist, s->m, s->l);
-                // printf("arglist[j]: %c\n", arglist[s->m]);
-                printf("no_quotes token %d is: %s\n", s->n, s->n_args[s->n]);
-                s->n++;
-                if (arglist[s->j] != '\0')
-                    s->j++;
-                s->m = s->k;
-                s->l = 0;
-                // no_quotes(arglist, s); 
-            }
-            // if (arglist[s->i][s->j] != '\0')
-            //         s->j = 0;
-            
-        // }
-        // printf("j: %d\n", s->j);
-    }
-    return (s);
-}
-
-
-
-t_split *all_quotes(char *arglist, t_split *s)
-{
-    if ((arglist[s->k] == '\'' || arglist[s->k] == '\"') && s->k == 0)
-    {
-        s->k++;
-        while (arglist[s->k] != '\0')
+        s_quotes(arglist, s);
+        while (arglist[s->j] != ' ' && (arglist[s->j + 1] != '\"' || arglist[s->j + 1] != '\'') && arglist[s->j] != '\0')
         {
-            s->k++;
+            s->j++;
             s->l++;
-            if ((arglist[s->k] == '\"' || arglist[s->k] == '\'') )
-            {
-                s->n_args[s->n] = ft_substr(arglist, s->j + 1, s->l);
-                s->n++;
-                s->k++;
-            }
         }
-        s->l = 0;
+        s->k = s->j + 1;
+        if ((arglist[s->j] == ' ' || arglist[s->j] == '\0') && s->l != 0)
+        {
+            s->n_args[s->n] = ft_substr(arglist, s->m, s->l);
+            s->n++;
+            if (arglist[s->j] != '\0')
+                s->j++;
+            s->m = s->k;
+            s->l = 0;
+        }
     }
     return (s);
 }
@@ -115,7 +80,6 @@ t_split *all_quotes(char *arglist, t_split *s)
 char    **stuff(char **arglist)
 {
     t_split s;
-
 
     s.i = 0;
     s.j = 0;
@@ -133,34 +97,31 @@ char    **stuff(char **arglist)
         while (arglist[s.i] != NULL)   
         {   
             no_quotes(arglist[s.i], &s);
-            // all_quotes(arglist[s.i], &s);
             s.i++;
             s.k = 0;
             s.j = 0;
             s.m = 0;
         }
     }  
-    
     s.n_args[s.n] = NULL;
-    printf("at the bottom\n");
     return (s.n_args);
 }
 
-int main(void)
-{
-    int j = 0;
-    char **fds, **other;
+// int main(void)
+// {
+//     int j = 0;
+//     char **fds, **other;
 
-    fds = ft_calloc(sizeof(char *), 5);
-    other = ft_calloc(sizeof(char *),  5);
-    fds[0] = "first word is";
-    fds[1] = "\"atring this echo";
-    fds[2] = "echo \"Not in quotes\" hi";
-    other = stuff(fds);
-    while (other[j])
-        j++;
-    other[j] = NULL;
-    printf("Program over\n");
+//     fds = ft_calloc(sizeof(char *), 5);
+//     other = ft_calloc(sizeof(char *),  5);
+//     fds[0] = "first word is";
+//     fds[1] = "\"atring this echo";
+//     fds[2] = "echo \"Not in quotes\" hi";
+//     other = stuff(fds);
+//     while (other[j])
+//         j++;
+//     other[j] = NULL;
+//     printf("Program over\n");
 
-    return (0);
-}
+//     return (0);
+// }

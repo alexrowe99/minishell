@@ -63,6 +63,8 @@ void	parent_process(int old_p[], int new_p[], int i);
 int		manage(int old_p[], int new_p[]);
 void    redirect(void);
 void	siggles(void);
-void    singles(void);
-void    first_wrdq(void);
+int     arg_count(char **arglist);
+t_split *s_quotes(char *arglist, t_split *s);
+t_split *no_quotes(char *arglist, t_split *s);
+char    **stuff(char **arglist);
 #endif
