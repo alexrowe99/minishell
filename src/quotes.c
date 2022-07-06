@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:03:37 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/07/06 13:58:25 by alex             ###   ########.fr       */
+/*   Updated: 2022/07/06 14:15:21 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,15 @@ t_split *s_quotes(char *arglist, t_split *s)
                 printf("s_quotes token %d is: %s\n", s->n, s->n_args[s->n]);
                 s->n++;
                 s->k++;
+                break ;
             }
         }
         s->j = s->k;
+        if (arglist[s->j] == ' ')
+        {
+            s->j++;
+            s->m = s->j;
+        }
         s->l = 0;
         s->k = 0;
     }
@@ -78,7 +84,7 @@ t_split *no_quotes(char *arglist, t_split *s)
             //         s->j = 0;
             
         // }
-        // printf("arglist[j]: %c\n", arglist[s->j]);
+        // printf("j: %d\n", s->j);
     }
     return (s);
 }
@@ -148,8 +154,8 @@ int main(void)
     fds = ft_calloc(sizeof(char *), 5);
     other = ft_calloc(sizeof(char *),  5);
     fds[0] = "first word is";
-    fds[1] = "next \"atring this\"";
-    fds[2] = "\"Not in quotes\" hi";
+    fds[1] = "\"atring this echo";
+    fds[2] = "echo \"Not in quotes\" hi";
     other = stuff(fds);
     while (other[j])
         j++;
