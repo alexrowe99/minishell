@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   commands.c                                         :+:      :+:    :+:   */
+/*   manage.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeedy <nspeedy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 12:56:33 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/06/20 15:58:51 by nspeedy          ###   ########.fr       */
+/*   Updated: 2022/07/07 11:22:30 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	child_process(int old_p[], int new_p[], int i)
 	if (g_d.pid == 0)
 	{
 		op_cl(old_p, new_p, i);
-		g_d.command_args = ft_split(g_d.arglist[i], ' ');
+		g_d.command_args = stuff(g_d.arglist);
 		redirect();
 		if (access(g_d.command_args[0], X_OK) != 0)
 			g_d.command = find_path(g_d.command_args);
@@ -63,7 +63,8 @@ void	parent_process(int old_p[], int new_p[], int i)
 			old_p[0] = new_p[0];
 			old_p[1] = new_p[1];
 		}
-		wait(NULL);
+		waitpid(g_d.pid, &g_d.statval, 0);
+		// printf("%d\n", g_d.statval);
 	}
 }
 

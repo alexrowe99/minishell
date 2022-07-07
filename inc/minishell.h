@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeedy <nspeedy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 15:45:14 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/07/04 13:00:30 by nspeedy          ###   ########.fr       */
+/*   Updated: 2022/07/06 15:31:17 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_data
 	char	*prompt;
 	int		cmd_amt;
 	int		pid;
+	int		statval;
 }	t_data;
 
 typedef struct s_split
@@ -45,6 +46,7 @@ typedef struct s_split
 	int		l;
 	int		n;
 	int		m;
+	char	c;
 	int		ac;
 	char	**n_args;	
 }	t_split;

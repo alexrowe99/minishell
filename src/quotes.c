@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:03:37 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/07/06 14:15:21 by alex             ###   ########.fr       */
+/*   Updated: 2022/07/06 14:40:27 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,13 @@ t_split *s_quotes(char *arglist, t_split *s)
 {
     if (arglist[s->k] == '\'' || arglist[s->k] == '\"')
     {
+        s->c = arglist[s->k];
         s->k++;
         while (arglist[s->k] != '\0')
         {
             s->k++;
             s->l++;
-            if ((arglist[s->k] == '\"' || arglist[s->k] == '\'') )
+            if (arglist[s->k] == s->c)
             {
                 s->n_args[s->n] = ft_substr(arglist, s->j + 1, s->l);
                 s->n++;
@@ -81,12 +82,7 @@ char    **stuff(char **arglist)
 {
     t_split s;
 
-    s.i = 0;
-    s.j = 0;
-    s.n = 0;
-    s.k = 0;
-    s.l = 0;
-    s.m = 0;
+    memset(&s, 0, sizeof(t_split));
     s.ac = arg_count(arglist);
     
     s.n_args = ft_calloc(sizeof(char *), s.ac + 1);
