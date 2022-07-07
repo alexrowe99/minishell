@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 12:51:14 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/07/06 14:33:36 by alex             ###   ########.fr       */
+/*   Updated: 2022/07/07 12:37:26 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	main(void)
 	while (g_d.cmdline != NULL)
 	{
 		g_d.arglist = ft_split(g_d.cmdline, '|');
-        
 		exsit(g_d.cmdline, g_d.arglist);
 		if (g_d.arglist != NULL)
 		{

@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 15:45:14 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/07/06 15:31:17 by alex             ###   ########.fr       */
+/*   Updated: 2022/07/07 12:25:56 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_data
 
 typedef struct s_split
 {
-	int		i;
 	int		j;
 	int		k;
 	int		l;
@@ -60,13 +59,12 @@ void	exsit(char *cmdline, char **arglist);
 void	redir_pipe(int i);
 void	op_cl(int old_p[], int new_p[], int i);
 int		bad_pipe(int new_p[], int i);
-void	child_process(int old_p[], int new_p[], int i);
+void	child_process(int old_p[], int new_p[], int i, t_split *s);
 void	parent_process(int old_p[], int new_p[], int i);
 int		manage(int old_p[], int new_p[]);
 void    redirect(void);
 void	siggles(void);
 int     arg_count(char **arglist);
-t_split *s_quotes(char *arglist, t_split *s);
-t_split *no_quotes(char *arglist, t_split *s);
+char	**no_quotes(char *arglist, t_split *s);
 char    **stuff(char **arglist);
 #endif
