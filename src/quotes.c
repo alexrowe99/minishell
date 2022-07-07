@@ -6,7 +6,7 @@
 /*   By: nspeedy <nspeedy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:03:37 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/07/07 13:31:29 by nspeedy          ###   ########.fr       */
+/*   Updated: 2022/07/07 15:22:41 by nspeedy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,48 +23,6 @@ int     arg_count(char **arglist)
         hma++;
     return (hma);
 }
-
-char *dollar_bils(char *n_args)
-{
-
-    int     find;
-    int     found;
-    int     i;
-    char    *env_arg;
-
-    found = 0;
-    find = 0;
-    i = 0;
-    env_arg = ft_calloc(sizeof(char *), ft_strlen(n_args));
-    if (n_args[i] == '\"')
-    {
-        i = 1;
-        if (n_args[i] == '$')
-        {
-            i++;
-            found = i;
-            while (n_args[i] != '\0')
-            {
-                i++;
-                find++;
-            }
-            env_arg = ft_substr(n_args, found, find);
-        }
-    }
-    if (n_args[0] == '$')
-    {
-        i++;
-        found = i;
-        while (n_args[i] != '\0')
-        {
-            i++;
-            find++;
-        }
-        env_arg = ft_substr(n_args, found, find);
-    }
-    return (env_arg);
-}
-
 
 t_split *s_quotes(char *arglist, t_split *s, char **n_args)
 {
@@ -128,23 +86,3 @@ char  **no_quotes(char *arglist, t_split *s)
     return (n_args);
 }
 
-// int main(void)
-// {
-//     int j = 0;
-//     char *fds, **other, *new;
-// 	t_split s;
-
-//     memset(&s, 0, sizeof(t_split));
-//     fds = "$first \"$word\" is";
-//     other = no_quotes(fds, &s);
-//     while (other[j])
-//         j++;
-//     other[j] = NULL;
-// 	for (int i=0;other[i];i++)
-// 		printf("%s\n", other[i]);
-//     new = dollar_bils(other[1]);
-//     printf("did you work %s\n", new);
-//     printf("Program over\n");
-
-//     return (0);
-}

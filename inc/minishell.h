@@ -6,7 +6,7 @@
 /*   By: nspeedy <nspeedy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 15:45:14 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/07/07 13:00:59 by nspeedy          ###   ########.fr       */
+/*   Updated: 2022/07/07 15:27:18 by nspeedy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,16 @@ typedef struct s_split
 	int		m;
 	char	c;
 	int		ac;
-	//char	**n_args;	
 }	t_split;
+
+typedef struct s_dollar
+{
+	int     find;
+    int     found;
+    int     i;
+    char    *env_arg;
+}	t_dollar;
+
 
 extern char	**environ;
 char	*find_path(char *cmd[]);
@@ -68,4 +76,5 @@ int     arg_count(char **arglist);
 char	**no_quotes(char *arglist, t_split *s);
 char    **stuff(char **arglist);
 char	*dollar_bils(char *n_args);
+char	*inside(char *n_args, t_dollar *d);
 #endif
