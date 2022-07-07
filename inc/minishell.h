@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nspeedy <nspeedy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 15:45:14 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/07/07 12:25:56 by alex             ###   ########.fr       */
+/*   Updated: 2022/07/07 13:00:59 by nspeedy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_split
 	int		m;
 	char	c;
 	int		ac;
-	char	**n_args;	
+	//char	**n_args;	
 }	t_split;
 
 extern char	**environ;
@@ -67,4 +67,5 @@ void	siggles(void);
 int     arg_count(char **arglist);
 char	**no_quotes(char *arglist, t_split *s);
 char    **stuff(char **arglist);
+char	*dollar_bils(char *n_args);
 #endif
