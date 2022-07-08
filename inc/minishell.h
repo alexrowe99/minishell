@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nspeedy <nspeedy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 15:45:14 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/07/08 15:09:27 by alex             ###   ########.fr       */
+/*   Updated: 2022/07/08 17:36:02 by nspeedy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,11 @@ typedef struct s_dollar
 	int     find;
     int     found;
     int     i;
+	int		n;
     char    *env_arg;
+	char	*str;
+	char	*tmp;
+	int		envi;
 }	t_dollar;
 
 
