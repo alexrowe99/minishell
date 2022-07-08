@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeedy <nspeedy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 12:56:33 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/07/07 15:32:44 by nspeedy          ###   ########.fr       */
+/*   Updated: 2022/07/08 14:33:36 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,14 @@ int	bad_pipe(int new_p[], int i)
 	return (0);
 }
 
-void	child_process(int old_p[], int new_p[], int i, t_split *s)
+void	child_process(int old_p[], int new_p[], int i)
 {
 	if (g_d.pid == 0)
 	{
 		op_cl(old_p, new_p, i);
-		g_d.command_args = no_quotes(g_d.arglist[i], s);
+		g_d.command_args = space_split(g_d.arglist[i]);
+		// for (int j=0;g_d.command_args[j];j++)
+		// 	printf("%s\n", g_d.command_args[j]);
 		redirect();
 		if (access(g_d.command_args[0], X_OK) != 0)
 			g_d.command = find_path(g_d.command_args);
@@ -87,10 +89,8 @@ void	op_cl(int old_p[], int new_p[], int i)
 int	manage(int old_p[], int new_p[])
 {
 	int	i;
-	t_split	s;
 
 	i = 0;
-	memset(&s, 0, sizeof(t_split));
 	g_d.cmd_amt = 0;
 	while (g_d.arglist[i])
 	{
@@ -103,13 +103,9 @@ int	manage(int old_p[], int new_p[])
 	{
 		if (bad_pipe(new_p, i) == 1)
 			return (1);
-		child_process(old_p, new_p, i, &s);
+		child_process(old_p, new_p, i);
 		parent_process(old_p, new_p, i);
 		i++;
-		s.k = 0;
-        s.j = 0;
-        s.m = 0;
-		s.n = 0;
 	}
 	return (0);
 }

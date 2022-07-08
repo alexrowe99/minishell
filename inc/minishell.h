@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeedy <nspeedy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 15:45:14 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/07/07 15:27:18 by nspeedy          ###   ########.fr       */
+/*   Updated: 2022/07/08 15:09:27 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <stdbool.h>
 
 typedef struct s_data
 {
@@ -40,14 +41,13 @@ typedef struct s_data
 
 typedef struct s_split
 {
+	int		i;
 	int		j;
 	int		k;
-	int		l;
-	int		n;
-	int		m;
+	bool	inquote;
 	char	c;
-	int		ac;
 }	t_split;
+	
 
 typedef struct s_dollar
 {
@@ -67,14 +67,12 @@ void	exsit(char *cmdline, char **arglist);
 void	redir_pipe(int i);
 void	op_cl(int old_p[], int new_p[], int i);
 int		bad_pipe(int new_p[], int i);
-void	child_process(int old_p[], int new_p[], int i, t_split *s);
+void	child_process(int old_p[], int new_p[], int i);
 void	parent_process(int old_p[], int new_p[], int i);
 int		manage(int old_p[], int new_p[]);
 void    redirect(void);
 void	siggles(void);
-int     arg_count(char **arglist);
-char	**no_quotes(char *arglist, t_split *s);
-char    **stuff(char **arglist);
 char	*dollar_bils(char *n_args);
 char	*inside(char *n_args, t_dollar *d);
+char	**space_split(const char *str);
 #endif
