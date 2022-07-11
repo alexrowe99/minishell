@@ -6,7 +6,7 @@
 /*   By: nspeedy <nspeedy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:04:01 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/07/11 15:28:39 by nspeedy          ###   ########.fr       */
+/*   Updated: 2022/07/11 15:48:11 by nspeedy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,16 @@ char	*dollar_bils(char *n_args)
             
             d.prev = ft_substr(n_args, 0, d.find - 1);
             printf("prev ======================= top = %s\n", d.prev);
-            d.tmp = ft_substr(n_args, d.find, d.found);
+            d.tmp = ft_substr(n_args, d.find, d.found - d.find);
+            printf("find + found == %d ==== %d find char ==== %c\n", d.find + d.found, d.find, n_args[d.find]);
             printf("tmp ======================== top = %s\n", d.tmp);
+            
             d.str = ft_substr(n_args, d.found + 1, ft_strlen(n_args));
             printf("str ======================== top = %s\n", d.str);
             //printf("n_args ===================== top = %s\n", n_args);
             while (environ[d.envi])
             {
-                printf("envi vars ===== loop %s ======= %d\n", environ[d.envi], d.envi);
+                //printf("envi vars ===== loop %s ======= %d\n", environ[d.envi], d.envi);
                 if (ft_strncmp(d.tmp, environ[d.envi], ft_strlen(d.tmp)) == 0)
                 {
                     // n_args = ft_calloc(sizeof(char *), (ft_strlen(n_args) * 2));
@@ -75,10 +77,11 @@ char	*dollar_bils(char *n_args)
                 d.envi++;
             }
         }
-        printf("end of string? i ==== %d i char ==== %c\n", d.i, n_args[d.i]);
+        //printf("end of string? i ==== %d i char ==== %c\n", d.i, n_args[d.i]);
         //d.found = 0;
         //d.envi = 0;
         d.i++;
+        d.find = 0;
 
     }   
     return (n_args);
@@ -92,7 +95,7 @@ int main(void)
 
 	new = calloc(sizeof(char *), 10);
     memset(&s, 0, sizeof(t_split));
-    fds = "\"$USER is $USER\"";
+    fds = "\"\'$USER\'$USER$USER\"";
     other = space_split(fds);
     while (other[j])
         j++;
