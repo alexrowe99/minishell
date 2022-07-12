@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:04:01 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/07/12 12:16:42 by alex             ###   ########.fr       */
+/*   Updated: 2022/07/12 12:40:21 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ extern t_data	g_d;
 
 t_dollar    *find(char *n_args, t_dollar *d)
 {
-    d->found = d->i;
-    d->i++;
+    d->found = d->i - 1;
     d->find = d->i;
     while (n_args[d->i] != '$' && n_args[d->i] != ' ' && n_args[d->i] != '\0')
     { 
@@ -59,21 +58,22 @@ t_dollar    *find(char *n_args, t_dollar *d)
 //     return (d);
 // }
 
-bool    do_thing(char *n_args, t_dollar *d)
-{
-    if (ft_strncmp(d->tmp, environ[d->envi], ft_strlen(d->tmp)) == 0)
-    {
-        d->tmp = ft_strchr(environ[d->envi], '=') + 1;
-        n_args = ft_strjoin(d->prev, d->tmp);
-        free(n_args);
-        n_args = ft_strjoin(d->prev, d->tmp);
-        n_args = ft_strjoin(n_args, d->str);
-        d->i = 0;
-        d->envi = 0;
-        return (true);
-    }
-    return (false);
-}
+// bool    do_thing(char *n_args, t_dollar *d)
+// {
+//     if (ft_strncmp(d->tmp, environ[d->envi], ft_strlen(d->tmp)) == 0)
+//     {
+//         d->tmp = ft_strchr(environ[d->envi], '=') + 1;
+//         n_args = ft_strjoin(d->prev, d->tmp);
+//         printf("%s\n", n_args);
+//         free(n_args);
+//         n_args = ft_strjoin(d->prev, d->tmp);
+//         n_args = ft_strjoin(n_args, d->str);
+//         d->i = 0;
+//         d->envi = 0;
+//         return (true);
+//     }
+//     return (false);
+// }
 
 
 char	*dollar_bils(char *n_args)
@@ -83,17 +83,23 @@ char	*dollar_bils(char *n_args)
     memset(&d, 0, sizeof(t_dollar));   
     while (n_args[d.i] != '\0')  
     {   
-        if (n_args[d.i] == '$')
+        if (n_args[d.i++] == '$')
         {
             find(n_args, &d);
             while (environ[d.envi])
             {
-                if (do_thing(n_args, &d))
+                if (ft_strncmp(d.tmp, environ[d.envi], ft_strlen(d.tmp)) == 0)
+                {
+                    d.tmp = ft_strchr(environ[d.envi], '=') + 1;
+                    n_args = ft_strjoin(d.prev, d.tmp);
+                    n_args = ft_strjoin(n_args, d.str);
+                    d.i = 0;
+                    d.envi = 0;
                     break ;
+                }
                 d.envi++;
             }
         }
-        d.i++;
         d.find = 0;
     }   
     return (n_args);
