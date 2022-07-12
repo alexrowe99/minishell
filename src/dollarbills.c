@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollarbills.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeedy <nspeedy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:04:01 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/07/11 15:48:11 by nspeedy          ###   ########.fr       */
+/*   Updated: 2022/07/12 12:16:42 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,22 @@ t_dollar    *find(char *n_args, t_dollar *d)
 //     return (d);
 // }
 
+bool    do_thing(char *n_args, t_dollar *d)
+{
+    if (ft_strncmp(d->tmp, environ[d->envi], ft_strlen(d->tmp)) == 0)
+    {
+        d->tmp = ft_strchr(environ[d->envi], '=') + 1;
+        n_args = ft_strjoin(d->prev, d->tmp);
+        free(n_args);
+        n_args = ft_strjoin(d->prev, d->tmp);
+        n_args = ft_strjoin(n_args, d->str);
+        d->i = 0;
+        d->envi = 0;
+        return (true);
+    }
+    return (false);
+}
+
 
 char	*dollar_bils(char *n_args)
 {
@@ -72,17 +88,8 @@ char	*dollar_bils(char *n_args)
             find(n_args, &d);
             while (environ[d.envi])
             {
-                if (ft_strncmp(d.tmp, environ[d.envi], ft_strlen(d.tmp)) == 0)
-                {
-                    d.tmp = ft_strchr(environ[d.envi], '=') + 1;
-                    n_args = ft_strjoin(d.prev, d.tmp);
-                    free(n_args);
-                    n_args = ft_strjoin(d.prev, d.tmp);
-                    n_args = ft_strjoin(n_args, d.str);
-                    d.i = 0;
-                    d.envi = 0;
+                if (do_thing(n_args, &d))
                     break ;
-                }
                 d.envi++;
             }
         }

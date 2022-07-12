@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Jul  8 15:30:39 2022
+# Make data base, printed on Tue Jul 12 09:11:24 2022
 
 # Variables
 
@@ -15,7 +15,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # automatic
 ?F = $(notdir $?)
 # environment
-WSLENV = VSCODE_WSL_EXT_LOCATION/up:VSCODE_SERVER_TAR/up
+WSLENV = VSCODE_WSL_EXT_LOCATION/up
 # default
 .SHELLFLAGS := -c
 # makefile (from 'Makefile', line 1)
@@ -53,9 +53,7 @@ PATH = /home/alex/.vscode-server/bin/92d25e35d9bf1a6b16f7d0758f25d48ace11e5b9/bi
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-dcabcde8-c46b-45a1-a370-9c00402b3f2e.sock
-# environment
-VSCODE_SERVER_TAR = /mnt/c/Users/ALEX~1.ROW/AppData/Local/Temp/vscode-remote-wsl/92d25e35d9bf1a6b16f7d0758f25d48ace11e5b9/vscode-server-stable-linux-x64.tar.gz
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-2ea9f25d-bd33-4977-8f72-383bf2c6848f.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -67,7 +65,7 @@ PWD = /home/alex/work/42/minishell/github-repo
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/12_interop
+WSL_INTEROP = /run/WSL/11_interop
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -152,6 +150,8 @@ LANG = C
 TERM = xterm-256color
 # environment
 WSL_DISTRO_NAME = Ubuntu
+# environment
+MOTD_SHOWN = update-motd
 # variable set hash-table stats:
 # Load=71/1024=7%, Rehash=0, Collisions=4/108=4%
 
@@ -161,9 +161,9 @@ WSL_DISTRO_NAME = Ubuntu
 
 # Directories
 
-# . (device 2064, inode 47187): 11 files, no impossibilities.
+# . (device 2064, inode 47187): 9 files, no impossibilities.
 
-# 11 files, no impossibilities in 1 directories.
+# 9 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -251,12 +251,12 @@ clean:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 19 / storage = 139 B / avg = 7 B
-# current buf: size = 8162 B / used = 139 B / count = 19 / avg = 7 B
+# strcache buffers: 1 (0) / strings = 17 / storage = 123 B / avg = 7 B
+# current buf: size = 8162 B / used = 123 B / count = 17 / avg = 7 B
 
-# strcache performance: lookups = 32 / hit rate = 40%
+# strcache performance: lookups = 30 / hit rate = 43%
 # hash-table stats:
-# Load=19/8192=0%, Rehash=0, Collisions=1/32=3%
-# Finished Make data base on Fri Jul  8 15:30:39 2022
+# Load=17/8192=0%, Rehash=0, Collisions=1/30=3%
+# Finished Make data base on Tue Jul 12 09:11:24 2022
 
  
