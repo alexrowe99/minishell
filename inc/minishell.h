@@ -58,25 +58,28 @@ typedef struct s_dollar
     char    *env_arg;
 	char	*str;
 	char	*tmp;
+	char	*prev;
 	int		envi;
 }	t_dollar;
 
 
 extern char	**environ;
-char	*find_path(char *cmd[]);
-char	*check_access(char **paths, char *cmd[]);
-int		strarrlen(char **arr);
-void	free_strarray(char **arr);
-void	exsit(char *cmdline, char **arglist);
-void	redir_pipe(int i);
-void	op_cl(int old_p[], int new_p[], int i);
-int		bad_pipe(int new_p[], int i);
-void	child_process(int old_p[], int new_p[], int i);
-void	parent_process(int old_p[], int new_p[], int i);
-int		manage(int old_p[], int new_p[]);
-void    redirect(void);
-void	siggles(void);
-char	*dollar_bils(char *n_args);
-char	*inside(char *n_args, t_dollar *d);
-char	**space_split(const char *str);
+char		*find_path(char *cmd[]);
+char		*check_access(char **paths, char *cmd[]);
+int			strarrlen(char **arr);
+void		free_strarray(char **arr);
+void		exsit(char *cmdline, char **arglist);
+void		redir_pipe(int i);
+void		op_cl(int old_p[], int new_p[], int i);
+int			bad_pipe(int new_p[], int i);
+void		child_process(int old_p[], int new_p[], int i);
+void		parent_process(int old_p[], int new_p[], int i);
+int			manage(int old_p[], int new_p[]);
+void    	redirect(void);
+void		siggles(void);
+char		*dollar_bils(char *n_args);
+char		*inside(char *n_args, t_dollar *d);
+char		**space_split(const char *str);
+char    	*replace(char *n_args, t_dollar *d);
+t_dollar    *find(char *n_args, t_dollar *d);
 #endif
