@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 12:56:33 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/07/08 14:33:36 by alex             ###   ########.fr       */
+/*   Updated: 2022/07/13 11:29:55 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,16 @@ int	bad_pipe(int new_p[], int i)
 
 void	child_process(int old_p[], int new_p[], int i)
 {
+	int	j;
+
 	if (g_d.pid == 0)
 	{
 		op_cl(old_p, new_p, i);
-		g_d.command_args = space_split(dollar_bils(g_d.arglist[i]));
-		redirect();
+		redirect(i);
+		g_d.command_args = space_split(g_d.arglist[i], ' ');
+		j = 0;
+		while (g_d.command_args[j])
+			rm_quote(g_d.command_args[j++]);
 		if (access(g_d.command_args[0], X_OK) != 0)
 			g_d.command = find_path(g_d.command_args);
 		else
@@ -89,13 +94,8 @@ int	manage(int old_p[], int new_p[])
 
 	i = 0;
 	g_d.cmd_amt = 0;
-	while (g_d.arglist[i])
-	{
+	while (g_d.arglist[g_d.cmd_amt])
 		g_d.cmd_amt++;
-		i++;
-	}
-	
-	i = 0;
 	while (i < g_d.cmd_amt)
 	{
 		if (bad_pipe(new_p, i) == 1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeedy <nspeedy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 15:45:14 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/07/08 17:36:02 by nspeedy          ###   ########.fr       */
+/*   Updated: 2022/07/13 11:23:25 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,12 @@ int			bad_pipe(int new_p[], int i);
 void		child_process(int old_p[], int new_p[], int i);
 void		parent_process(int old_p[], int new_p[], int i);
 int			manage(int old_p[], int new_p[]);
-void    	redirect(void);
+void    	redirect(int i);
 void		siggles(void);
 char		*dollar_bils(char *n_args);
 char		*inside(char *n_args, t_dollar *d);
-char		**space_split(const char *str);
+char		**space_split(const char *s, char delim);
 char    	*replace(char *n_args, t_dollar *d);
 t_dollar    *find(char *n_args, t_dollar *d);
+void		rm_quote(char *str);
 #endif

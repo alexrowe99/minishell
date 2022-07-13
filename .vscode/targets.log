@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue Jul 12 09:11:24 2022
+# Make data base, printed on Wed Jul 13 09:38:04 2022
 
 # Variables
 
@@ -53,7 +53,7 @@ PATH = /home/alex/.vscode-server/bin/92d25e35d9bf1a6b16f7d0758f25d48ace11e5b9/bi
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-2ea9f25d-bd33-4977-8f72-383bf2c6848f.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-bb114473-62c1-46b0-9c8b-a4e19323b8ce.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -75,7 +75,7 @@ LESSCLOSE = /usr/bin/lesspipe %s %s
 # environment
 LOGNAME = alex
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # makefile (from 'Makefile', line 9)
 HEADERS = -I$(INC) -I$(LIBFT) -I /usr/local/opt/readline/include/
 # environment
@@ -161,7 +161,7 @@ MOTD_SHOWN = update-motd
 
 # Directories
 
-# . (device 2064, inode 47187): 9 files, no impossibilities.
+# . (device 2064, inode 46975): 9 files, no impossibilities.
 
 # 9 files, no impossibilities in 1 directories.
 
@@ -213,7 +213,7 @@ all:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-08 13:21:15.473101305
+#  Last modified 2022-07-13 09:34:58.37223053
 #  File has been updated.
 #  Successfully updated.
 
@@ -257,6 +257,6 @@ clean:
 # strcache performance: lookups = 30 / hit rate = 43%
 # hash-table stats:
 # Load=17/8192=0%, Rehash=0, Collisions=1/30=3%
-# Finished Make data base on Tue Jul 12 09:11:24 2022
+# Finished Make data base on Wed Jul 13 09:38:04 2022
 
  
