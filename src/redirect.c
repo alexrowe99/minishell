@@ -63,7 +63,7 @@ int	heredoc(char *eof)
 		return (-1);
 	}
 	line = readline("> ");
-	while (strncmp(line, eof, ft_strlen(line)))
+	while (ft_strncmp(line, eof, ft_strlen(line)))
 	{
 		write(p[1], line, ft_strlen(line));
 		write(p[1], "\n", 1);

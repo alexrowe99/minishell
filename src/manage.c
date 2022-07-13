@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 12:56:33 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/07/13 15:30:45 by alex             ###   ########.fr       */
+/*   Updated: 2022/07/13 16:36:37 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ int	child_process(int old_p[], int new_p[], int i)
 		op_cl(old_p, new_p, i);
 		if (redirect(i))
 			return (1);
-		// for (int k = 0;g_d.arglist[k];k++)
-		// 	printf("%s\n",g_d.arglist[k]);
 		g_d.command_args = space_split(dollar_bils(g_d.arglist[i]), ' ');
 		j = 0;
 		while (g_d.command_args[j])
 			rm_quote(g_d.command_args[j++]);
+		if (cd() == 0)
+			exit(0);
 		if (access(g_d.command_args[0], X_OK) != 0)
 			g_d.command = find_path(g_d.command_args);
 		else
