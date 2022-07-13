@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 12:56:33 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/07/13 11:29:55 by alex             ###   ########.fr       */
+/*   Updated: 2022/07/13 15:30:45 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,18 @@ int	bad_pipe(int new_p[], int i)
 	return (0);
 }
 
-void	child_process(int old_p[], int new_p[], int i)
+int	child_process(int old_p[], int new_p[], int i)
 {
 	int	j;
 
 	if (g_d.pid == 0)
 	{
 		op_cl(old_p, new_p, i);
-		redirect(i);
-		g_d.command_args = space_split(g_d.arglist[i], ' ');
+		if (redirect(i))
+			return (1);
+		// for (int k = 0;g_d.arglist[k];k++)
+		// 	printf("%s\n",g_d.arglist[k]);
+		g_d.command_args = space_split(dollar_bils(g_d.arglist[i]), ' ');
 		j = 0;
 		while (g_d.command_args[j])
 			rm_quote(g_d.command_args[j++]);
@@ -52,6 +55,7 @@ void	child_process(int old_p[], int new_p[], int i)
 		execve(g_d.command, g_d.command_args, environ);
 		perror("execve");
 	}
+	return (0);
 }
 
 void	parent_process(int old_p[], int new_p[], int i)
@@ -100,7 +104,8 @@ int	manage(int old_p[], int new_p[])
 	{
 		if (bad_pipe(new_p, i) == 1)
 			return (1);
-		child_process(old_p, new_p, i);
+		if (child_process(old_p, new_p, i))
+			return (1);
 		parent_process(old_p, new_p, i);
 		i++;
 	}
