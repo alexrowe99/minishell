@@ -38,9 +38,7 @@ void	child_process(int old_p[], int new_p[], int i)
 	if (g_d.pid == 0)
 	{
 		op_cl(old_p, new_p, i);
-		g_d.command_args = space_split(g_d.arglist[i]);
-		// for (int j=0;g_d.command_args[j];j++)
-		// 	printf("%s\n", g_d.command_args[j]);
+		g_d.command_args = space_split(dollar_bils(g_d.arglist[i]));
 		redirect();
 		if (access(g_d.command_args[0], X_OK) != 0)
 			g_d.command = find_path(g_d.command_args);
@@ -66,7 +64,6 @@ void	parent_process(int old_p[], int new_p[], int i)
 			old_p[1] = new_p[1];
 		}
 		waitpid(g_d.pid, &g_d.statval, 0);
-		// printf("%d\n", g_d.statval);
 	}
 }
 
