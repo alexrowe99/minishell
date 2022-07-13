@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 15:45:14 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/07/13 11:23:25 by alex             ###   ########.fr       */
+/*   Updated: 2022/07/13 14:33:35 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,14 @@ void		exsit(char *cmdline, char **arglist);
 void		redir_pipe(int i);
 void		op_cl(int old_p[], int new_p[], int i);
 int			bad_pipe(int new_p[], int i);
-void		child_process(int old_p[], int new_p[], int i);
+int			child_process(int old_p[], int new_p[], int i);
 void		parent_process(int old_p[], int new_p[], int i);
 int			manage(int old_p[], int new_p[]);
-void    	redirect(int i);
+int	    	redirect(int i);
 void		siggles(void);
 char		*dollar_bils(char *n_args);
 char		*inside(char *n_args, t_dollar *d);
+void		check_quotes(t_split *sp, const char *s, int i);
 char		**space_split(const char *s, char delim);
 char    	*replace(char *n_args, t_dollar *d);
 t_dollar    *find(char *n_args, t_dollar *d);
