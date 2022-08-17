@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 12:51:14 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/07/13 12:13:38 by alex             ###   ########.fr       */
+/*   Updated: 2022/07/28 23:23:57 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(void)
 	int		old_p[2];
 
 	siggles();
+	g_d.env = ft_fill_envs();
 	g_d.cmdline = readline(">>> ");
 	while (g_d.cmdline != NULL)
 	{

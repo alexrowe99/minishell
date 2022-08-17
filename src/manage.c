@@ -6,7 +6,7 @@
 /*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 12:56:33 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/07/13 15:30:45 by alex             ###   ########.fr       */
+/*   Updated: 2022/07/28 23:14:25 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,27 +33,30 @@ int	bad_pipe(int new_p[], int i)
 	return (0);
 }
 
-int	child_process(int old_p[], int new_p[], int i)
+int	child_process(int old_p[], int new_p[], int i, int j)
 {
-	int	j;
+	char	*command;
 
+	command = NULL;
 	if (g_d.pid == 0)
 	{
 		op_cl(old_p, new_p, i);
 		if (redirect(i))
 			return (1);
-		// for (int k = 0;g_d.arglist[k];k++)
-		// 	printf("%s\n",g_d.arglist[k]);
 		g_d.command_args = space_split(dollar_bils(g_d.arglist[i]), ' ');
-		j = 0;
 		while (g_d.command_args[j])
 			rm_quote(g_d.command_args[j++]);
-		if (access(g_d.command_args[0], X_OK) != 0)
-			g_d.command = find_path(g_d.command_args);
-		else
-			g_d.command = g_d.command_args[0];
-		execve(g_d.command, g_d.command_args, environ);
-		perror("execve");
+		run_ex_un_env(g_d.command_args);
+		cd();
+		if (access(g_d.command_args[0], X_OK) != 0 && is_builtin())
+			command = find_path(g_d.command_args);
+		if (!command)
+			command = g_d.command_args[0];
+		if (is_builtin())
+		{
+			execve(command, g_d.command_args, g_d.env);
+			printf("%s: command not found\n", g_d.command_args[0]);
+		}
 	}
 	return (0);
 }
@@ -95,6 +98,7 @@ void	op_cl(int old_p[], int new_p[], int i)
 int	manage(int old_p[], int new_p[])
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	g_d.cmd_amt = 0;
@@ -104,7 +108,8 @@ int	manage(int old_p[], int new_p[])
 	{
 		if (bad_pipe(new_p, i) == 1)
 			return (1);
-		if (child_process(old_p, new_p, i))
+		j = 0;
+		if (child_process(old_p, new_p, i, j))
 			return (1);
 		parent_process(old_p, new_p, i);
 		i++;
