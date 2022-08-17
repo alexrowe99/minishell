@@ -3,16 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nspeedy <nspeedy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 12:50:59 by nspeedy           #+#    #+#             */
-/*   Updated: 2022/07/07 15:32:56 by nspeedy          ###   ########.fr       */
+/*   Updated: 2022/07/28 22:18:07 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_data	g_d;
+
+bool	is_builtin(void)
+{
+	return (ft_strncmp(g_d.command_args[0], "export", 6)
+		&& ft_strncmp(g_d.command_args[0], "unset", 5)
+		&& ft_strncmp(g_d.command_args[0], "cd", 2)
+		&& ft_strncmp(g_d.command_args[0], "env", 3));
+}
 
 char	*check_access(char **paths, char *cmd[])
 {
@@ -21,6 +29,8 @@ char	*check_access(char **paths, char *cmd[])
 	char	*path;
 
 	i = 0;
+	if (!paths)
+		return (NULL);
 	while (paths[i])
 	{
 		temp = ft_strjoin(paths[i], "/");
@@ -45,11 +55,11 @@ char	*find_path(char *cmd[])
 
 	i = 0;
 	paths = NULL;
-	while (environ[i])
+	while (g_d.env[i])
 	{
-		if (ft_strncmp("PATH=", environ[i], 5) == 0)
+		if (ft_strncmp("PATH=", g_d.env[i], 5) == 0)
 		{
-			paths = ft_split(environ[i] + 5, ':');
+			paths = ft_split(g_d.env[i] + 5, ':');
 			break ;
 		}
 		i++;
